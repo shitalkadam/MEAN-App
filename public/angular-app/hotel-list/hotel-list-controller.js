@@ -7,6 +7,7 @@ function HotelsController(hotelDataFactory) {
 
 
     hotelDataFactory.hotelList().then(function(response) {
+
         vm.hotels = response.data;
     });
 }

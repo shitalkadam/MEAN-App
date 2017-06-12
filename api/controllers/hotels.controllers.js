@@ -57,6 +57,7 @@ module.exports.hotelsGetAll = function(req,res) {
     // This is used for the native mongo driver now we are using Hotel model
     // var db = dbconn.get();
     // var collection = db.collection('hotels');
+    console.log('Requested by: ' + req.user);
 
     var offset = 0;
     var count = 5;

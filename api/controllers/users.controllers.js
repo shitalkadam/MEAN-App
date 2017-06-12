@@ -46,7 +46,7 @@ module.exports.login = function(req,res) {
                     username : user.username
                 }, 's3cr3t', { expiresIn: 3600 });
                 console.log('User found', user);
-                res.status(200).json({sucess: true, token: token});
+                res.status(200).json({success: true, token: token});
             } else {
                 res.status(401).json("Unauthorised");
             }
@@ -56,7 +56,21 @@ module.exports.login = function(req,res) {
 
 
 module.exports.authenticate = function(req, res, next) {
-
+    var headerExists = req.headers.authorization;
+    if(headerExists) {
+        var token = req.headers.authorization.split(' ')[1] //---> Authorization Bearer xxx
+        jwt.verify(token, 's3cr3t', function(error, decoded) {
+            if(error) {
+                console.log(error);
+                res.status(401).json('Unauthorised');
+            } else {
+                req.user = decoded.username;
+                next();
+            }
+        });
+    } else {
+        res.status(403).json('No token provided');
+    }
 };
 
 

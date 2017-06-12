@@ -32,8 +32,3 @@ var server = app.listen(app.get('port'), function() {
 
     console.log('Magic happens on port ' + port);
 });
-
-
-/// "https://code.angularjs.org/1.4.0/angular.min.js"
-
-//.gitignore node_modules
